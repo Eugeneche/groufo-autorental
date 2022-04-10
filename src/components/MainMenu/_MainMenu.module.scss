@@ -1,0 +1,57 @@
+.main-menu {
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    background: #ffffffda;
+    z-index: 100;
+
+    .container {
+        margin: auto;
+        max-width: 1200px;
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        height: 100%;
+
+        .logo {
+            align-self: center;
+        }
+    }
+}
+
+.items {
+    align-self: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .pages {
+
+        ul {
+            display: flex;
+            margin: 0;
+
+            li {
+                list-style: none;
+                margin: 0;
+                margin-left: 20px;
+        
+                a {
+                    text-decoration: none;
+                    color: #000000;
+                }           
+            }
+        }
+    }
+
+    .socials {
+        display: flex;
+        justify-content: flex-end;
+
+        a {
+            text-decoration: none;
+            color: #150046;
+        }
+    }
+}
+
