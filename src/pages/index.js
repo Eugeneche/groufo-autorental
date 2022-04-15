@@ -10,10 +10,11 @@ import vehicles from "../data/vehicles.yaml"
 import * as styles from "../style/_style.module.scss"
 import ContentSlider from "../components/ContentSlider/ContentSlider"
 
-//import { graphql } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 
-const IndexPage = (props) => {
-  //console.log(props)
+const IndexPage = () => {
+
+
   return (
   
     <Layout>
@@ -21,7 +22,7 @@ const IndexPage = (props) => {
       <Seo title="Home" />
       <div className={styles.contentContainer}>
         
-          {vehicles.map(bodyTipe => {
+          {vehicles['content'].map(bodyTipe => {
             return (
               <section key={Object.keys(bodyTipe)}>
                 <h2>
@@ -40,18 +41,6 @@ const IndexPage = (props) => {
     </Layout>
 )}
 
-/* const data = graphql`
-query MyQuery {
-  allYaml {
-    nodes {
-      children {
-        ... on File {
-          name
-        }
-      }
-    }
-  }
-}
-`
-console.log(data) */
+
+
 export default IndexPage

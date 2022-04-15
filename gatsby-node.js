@@ -1,10 +1,10 @@
-const fs = require("fs")
+/* const fs = require("fs")
 const yaml = require("js-yaml")
 
 exports.createPages = ({ actions }) => {
 
   const { createPage } = actions
-  const ymlDoc = yaml.load(fs.readFileSync(".src/dat/vehicles.yaml", "utf-8"))
+  const ymlDoc = yaml.load(fs.readFileSync(".src/data/vehicles.yaml", "utf-8"))
   ymlDoc.forEach(element => {
     createPage({
       bodytype: element.bodytype,
@@ -14,7 +14,7 @@ exports.createPages = ({ actions }) => {
       },
     })
   })
-}
+} */
 
 
 

@@ -6,25 +6,25 @@ module.exports = {
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sass`,
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `vehicles`,
+        path: `${__dirname}/src/images/vehicles/`,
+      },
+    },
+        {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `src`,
         path: `${__dirname}/src/`,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `vehicles`,
-        path: `${__dirname}/src/images/vehicles`,
-      },
-    },
-    `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sass`,
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
@@ -34,13 +34,13 @@ module.exports = {
         display: 'swap'
       }
     },
-    {
+/*     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
+        path: `${__dirname}/src/images/`,
+      }, 
+    },*/
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
