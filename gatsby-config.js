@@ -12,13 +12,21 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sass`,
     {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        defaultLayouts: {
+          default: require.resolve('./src/components/layout.js'),
+        },
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `vehicles`,
         path: `${__dirname}/src/images/vehicles/`,
       },
     },
-        {
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `src`,
@@ -34,13 +42,6 @@ module.exports = {
         display: 'swap'
       }
     },
-/*     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images/`,
-      }, 
-    },*/
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

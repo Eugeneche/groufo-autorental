@@ -1,11 +1,9 @@
 import * as React from "react"
-//import { Link } from "gatsby"
-//import { StaticImage } from "gatsby-plugin-image"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import HeaderSlider from "../components/HeaderSlider/HeaderSlider"
-import vehicles from "../data/vehicles.yaml"
+//import vehicles from "../data/vehicles.yaml"
 
 import * as styles from "../style/_style.module.scss"
 import ContentSlider from "../components/ContentSlider/ContentSlider"
@@ -14,6 +12,36 @@ import { graphql, useStaticQuery } from "gatsby"
 
 const IndexPage = () => {
 
+  let data = useStaticQuery(graphql`
+      query getdata {
+        allMdx {
+          edges {
+            node {
+              frontmatter {
+                category
+                airConditioner
+                bodyStyle
+                name
+                price
+                relPath
+                seats
+                title
+                transmission
+                year
+              }
+            }
+          }
+        }
+      }
+    `)
+
+  let uniqueCategories = data.allMdx.edges.map(node => {
+    return node.node.frontmatter.category
+  })
+
+  uniqueCategories = [...new Set(uniqueCategories)].reverse()
+
+  //console.log(data.allMdx.edges)
 
   return (
   
@@ -22,17 +50,16 @@ const IndexPage = () => {
       <Seo title="Home" />
       <div className={styles.contentContainer}>
         
-          {vehicles['content'].map(bodyTipe => {
+          {uniqueCategories.map(category => {
+            const slider = []
+            data.allMdx.edges.map(node => {
+              node.node.frontmatter.category === category && slider.push(node.node.frontmatter)
+              //console.log(slider)
+            })
             return (
-              <section key={Object.keys(bodyTipe)}>
-                <h2>
-                  {Object.keys(bodyTipe)}
-                </h2>
-                <ContentSlider 
-                  bodyType={Object.keys(bodyTipe).toString()} 
-                  array={bodyTipe[Object.keys(bodyTipe).toString()]}/>
-                  
-                  {/* {console.log(bodyTipe[Object.keys(bodyTipe).toString()])} */} 
+              <section key={category}>
+                <h2>{category}</h2>
+                <ContentSlider array={slider}/>
               </section>
             )
           })} 
@@ -40,7 +67,5 @@ const IndexPage = () => {
       </div>
     </Layout>
 )}
-
-
 
 export default IndexPage

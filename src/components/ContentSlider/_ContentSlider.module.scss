@@ -3,7 +3,39 @@
 }
 
 .content-slider-item {
-    /* width: 100%; */
     min-height: 100px;
     border: 1px solid #808080;
+    padding: 1%;
+    box-sizing: border-box;
+
+    h3 {
+        
+        color: darkgray;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .properties-bar {
+        display: flex;
+        font-size: 14px;
+
+        .property-item {
+            display: flex;
+            margin-right: 7px;
+
+            img {
+                margin: 0 5px;
+                align-self: center;
+            }
+
+            .property-icon {
+                height: 20px;
+            }
+        }
+
+
+
+    }
 }

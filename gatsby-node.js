@@ -1,32 +1,24 @@
-/* const fs = require("fs")
-const yaml = require("js-yaml")
+const path = require("path")
 
-exports.createPages = ({ actions }) => {
+exports.createPages = async ({ graphql, actions }) => {
+ 
+  const { data } = await graphql(`
+    query {
+      allMdx {
+        nodes {
+          slug
+        }
+      }
+    }
+  `)
 
-  const { createPage } = actions
-  const ymlDoc = yaml.load(fs.readFileSync(".src/data/vehicles.yaml", "utf-8"))
-  ymlDoc.forEach(element => {
-    createPage({
-      bodytype: element.bodytype,
-      component: require.resolve("./src/components/ContentSlider.js"),
-      context: {
-        vehicle: element.vehicle
-      },
+  data?.allMdx?.nodes?.forEach(node => {
+    const url = node.slug.toLowerCase()
+    console.log(url)
+    actions.createPage({
+      path: url,
+      component: path.resolve('./src/components/ItemPage/ItemPage.js'),
+      context: { url }
     })
-  })
-} */
-
-
-
-
-
-
-exports.createPages = async ({ actions }) => {
-  const { createPage } = actions
-  createPage({
-    path: "/using-dsg",
-    component: require.resolve("./src/templates/using-dsg.js"),
-    context: {},
-    defer: true,
   })
 }

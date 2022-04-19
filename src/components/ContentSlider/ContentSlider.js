@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react"
 
 import ContentSliderItem from "./ContentSliderItem"
-import vehicles from "../../data/vehicles.yaml"
 import * as styles from "./_ContentSlider.module.scss"
 
-
+import { graphql, useStaticQuery } from "gatsby"
 
 const ContentSlider = (props) => {
 
@@ -29,17 +28,20 @@ const ContentSlider = (props) => {
     setSlider(props.array.slice(-photosQty))
   }, [photosQty, props.array])
 
-  //console.log(slider)
-  
   return (
     <div className={styles.contentSlider}>
       
         {slider.map(photo => {
-          //console.log(photo.photo)
             return <ContentSliderItem 
                     key={photo.id} 
                     style={`${100/photosQty}%`} 
                     title={photo.name}
+                    seats={photo.seats}
+                    price={photo.price}
+                    transmission={photo.transmission}
+                    bodyStyle={photo.bodyStyle}
+                    year={photo.year}
+                    ac={photo.airConditioner}
                     imagePath={photo.relPath} 
                     alt={photo.name} 
                     />
