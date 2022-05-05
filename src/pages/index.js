@@ -3,7 +3,6 @@ import * as React from "react"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import HeaderSlider from "../components/HeaderSlider/HeaderSlider"
-//import vehicles from "../data/vehicles.yaml"
 
 import * as styles from "../style/_style.module.scss"
 import ContentSlider from "../components/ContentSlider/ContentSlider"
@@ -28,6 +27,7 @@ const IndexPage = () => {
                 title
                 transmission
                 year
+                dir
               }
             }
           }
@@ -41,8 +41,6 @@ const IndexPage = () => {
 
   uniqueCategories = [...new Set(uniqueCategories)].reverse()
 
-  //console.log(data.allMdx.edges)
-
   return (
   
     <Layout>
@@ -53,8 +51,7 @@ const IndexPage = () => {
           {uniqueCategories.map(category => {
             const slider = []
             data.allMdx.edges.map(node => {
-              node.node.frontmatter.category === category && slider.push(node.node.frontmatter)
-              //console.log(slider)
+              return node.node.frontmatter.category === category && slider.push(node.node.frontmatter)
             })
             return (
               <section key={category}>

@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react"
 import ContentSliderItem from "./ContentSliderItem"
 import * as styles from "./_ContentSlider.module.scss"
 
-import { graphql, useStaticQuery } from "gatsby"
-
 const ContentSlider = (props) => {
 
   const [width, setWidth] = useState(window.innerWidth)
@@ -21,8 +19,10 @@ const ContentSlider = (props) => {
 
   useEffect(() => {
     window.addEventListener('resize', () => setWidth(window.innerWidth))
-    return () => window.removeEventListener('resize', () => setWidth(window.innerWidth))
-  }, [width])
+    window.removeEventListener('resize', () => setWidth())
+    return () => { 
+      setWidth(null)}
+  }, [window.innerWidth])
  
   useEffect(() => {
     setSlider(props.array.slice(-photosQty))
@@ -34,7 +34,7 @@ const ContentSlider = (props) => {
         {slider.map(photo => {
             return <ContentSliderItem 
                     key={photo.id} 
-                    style={`${100/photosQty}%`} 
+                    style={`${100/photosQty - 1}%`} 
                     title={photo.name}
                     seats={photo.seats}
                     price={photo.price}

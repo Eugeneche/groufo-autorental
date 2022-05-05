@@ -8,20 +8,20 @@ const MainMenu = () => {
         <div className={styles.mainMenu}>
             <div className={styles.container}>
                 <div className={styles.logo}>
-                    <StaticImage
-                        src="../../images/groufo_logo.svg"
-                        /* width={53} */
-                        /* quality={100} */
-                        formats={["auto", "webp", "avif"]}
-                        alt="A Groufo logo"
-                        style={{  }}
-                    />
+                    <Link to="/">
+                        <StaticImage
+                            src="../../images/groufo_logo_yellow_white.svg"
+                            formats={["auto", "webp", "avif"]}
+                            alt="A Groufo logo"
+                            style={{  }}
+                        />
+                    </Link>
                 </div>
                 <div className={styles.items}>
                     <div className={styles.pages}>
                         <ul>
                             <li>
-                                <Link to="/cars">Auta</Link>
+                                <Link to="/cars">Auta&nbsp;<span style={{display: "inline-block", color: "grey",  transform: "rotate(90deg)", top: "7px"}}>&#10095;</span></Link>
                             </li>
                             <li>
                                 <Link to="/conditions">Podminky</Link>
