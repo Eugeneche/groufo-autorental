@@ -11,13 +11,17 @@
         display: flex;
         justify-content: space-between;
         align-content: center;
-        height: 100%;
+        /* height: 100%; */
+        min-height: 50px;
         padding: 0 20px;
         background: #262626e3;
 
         .logo {
             align-self: center;
             
+            img {
+                margin-bottom: -7px;
+            }
         }
 
         .phone, .hamburger {
@@ -112,11 +116,45 @@
     background: #3f3f3f52;
     width: 100%;
     height: 100%;
-/*     top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0; */
-    z-index: 20;
+    z-index: 100;
+}
+
+.mobile-menu {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 90vh;
+    overflow-x: hidden;
+    margin: auto;
+    background: #ffffff;
+    transform: translate(0, 5%);
+
+    .close {
+        width: 30px;
+        margin: 30px;
+        align-self: end;
+    } 
+
+    .mobile-menu-pages {
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 25%;
+
+            li {
+                position: relative;
+                list-style: none;
+                text-transform: uppercase;
+        
+                a {                   
+                    text-decoration: none;
+                    color: #202020;
+                }
+            }
+        }        
+    }
 }
 /* mobile end */
 
@@ -124,11 +162,24 @@
     
     .main-menu {
         /* padding: 0 20px; */
-        height: 50px;
+        min-height: 50px;
     }
 
 /*     .container {
         
     } */
+}
+
+@media screen and (max-width: 568px) {
+
+    .container {
+        flex-wrap: wrap;
+        /* flex-direction: row-reverse; */
+        /* min-height: 50px; */
+
+/*         .phone {
+            order: 2;
+        } */
+    }
 }
 

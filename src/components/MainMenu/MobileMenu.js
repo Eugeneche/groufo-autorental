@@ -1,47 +1,63 @@
-import * as React from "react"
+import React, { useState } from "react"
 import * as styles from "./_MainMenu.module.scss"
 import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import { graphql, useStaticQuery } from "gatsby"
+import logo from "../../images/groufo_logo_yellow_white.svg"
 import menu from "../../images/icons/hamb-menu.svg"
 import phone from "../../images/icons/phone.svg"
+import close from "../../images/icons/close.svg"
 
 const MobileMenu = () => {
+
+    let data = useStaticQuery(graphql`
+    query getCategories {
+        allMdx(filter: {slug: {eq: "categories"}}) {
+          nodes {
+            frontmatter {
+              categories
+            }
+          }
+        }
+      }
+  `)
+    console.log(data)
+
+    const[isShow, setShow] = useState(false)
+    const showMobileMenu = () => {
+        setShow(true)
+    }
+
+    const closeMobileMenu = () => {
+        setShow(false)
+    }
+
     return (
         <>
             <div className={styles.mainMenu}>
                 <div className={styles.container}>
                     <div className={styles.logo}>
                         <Link to="/">
-                            <StaticImage
-                                src="../../images/groufo_logo_yellow_white.svg"
-                                formats={["auto", "webp", "avif"]}
-                                alt="A Groufo logo"
-                                style={{  }}
-                            />
+                            <img src={logo} alt="groufo logo"></img>
                         </Link>
                     </div>
                     <div className={styles.phone}>
-                        <a href="tel:+420736195020"><img src={phone}></img><span>736 195 020</span></a>
+                        <a href="tel:+420736195020"><img src={phone} alt="phone icon"></img><span>736 195 020</span></a>
                     </div>
                     <div className={styles.hamburger}>
-                        <img src={menu}></img>
+                        <img src={menu} alt="hamburger menu icon" onClick={showMobileMenu}></img>
                     </div>
                 </div>
             </div>
-            <div className={styles.mobileMenuShadow}>
+            <div className={styles.mobileMenuShadow}
+                style={isShow ? {left: "0"} : {left: "-100%"}}>
                 <div className={styles.mobileMenu}>
+                    <img src={close} className={styles.close} alt="close icon" onClick={closeMobileMenu}></img>
 
-                </div>
-            </div>
-        </>
-    )
-}
-
-export default MobileMenu
-
-/* 
-                    <div className={styles.pages}>
+                    <div className={styles.mobileMenuPages}>
                         <ul>
+                            <li>
+                                <Link to="/">Domů</Link>
+                            </li>
                             <li>
                                 <Link to="/cars">Auta&nbsp;<span style={{display: "inline-block", color: "grey",  transform: "rotate(90deg)", top: "7px"}}>&#10095;</span></Link>
                             </li>
@@ -52,8 +68,25 @@ export default MobileMenu
                                 <Link to="/contacts">Kontakty</Link>
                             </li>
                         </ul>
-
                     </div>
-                    <div className={styles.socials}>
-                        <span>Zavolejte nám:&nbsp;</span><a href="tel:+420736195020">736 195 020</a>
-                    </div> */
+
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default MobileMenu
+
+/* export const categories = graphql(`
+query getCategories {
+    file(name: {eq: "categories"}) {
+      childMdx {
+        frontmatter {
+          categories
+        }
+      }
+    }
+  }
+`) */
+

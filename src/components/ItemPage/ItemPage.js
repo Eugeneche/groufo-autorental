@@ -15,7 +15,7 @@ const ItemPage = ({data}) => {
       imagePath = fileNode.childImageSharp.gatsbyImageData
     }
   })
-console.log(data)
+  
   return (
     <Layout>
       <Seo title={data.mdx.frontmatter.name} />
