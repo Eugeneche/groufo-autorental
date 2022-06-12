@@ -27,8 +27,7 @@ const Layout = ({ children }) => {
   
   return (
     <div className={styles.appWrapper}>
-      {/* <MainMenu /> */}
-        {width > 1000 ? <MainMenu /> : <MobileMenu />}  
+      {width > 1000 ? <MainMenu /> : <MobileMenu />}    
         <main>{children}</main>
       <Footer />
     </div>

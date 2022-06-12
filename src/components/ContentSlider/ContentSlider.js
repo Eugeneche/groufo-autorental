@@ -25,8 +25,8 @@ const ContentSlider = (props) => {
   }, [window.innerWidth])
  
   useEffect(() => {
-    setSlider(props.array.slice(-photosQty))
-  }, [photosQty, props.array])
+    setSlider(props.imageData.slice(-photosQty))
+  }, [photosQty, props.imageData])
 
   return (
     <div className={styles.contentSlider}>
@@ -35,15 +35,15 @@ const ContentSlider = (props) => {
             return <ContentSliderItem 
                     key={photo.id} 
                     style={`${100/photosQty - 1}%`} 
-                    title={photo.name}
-                    seats={photo.seats}
-                    price={photo.price}
-                    transmission={photo.transmission}
-                    bodyStyle={photo.bodyStyle}
-                    year={photo.year}
-                    ac={photo.airConditioner}
-                    imagePath={photo.relPath} 
-                    alt={photo.name} 
+                    title={photo.frontmatter.name}
+                    seats={photo.frontmatter.seats}
+                    price={photo.frontmatter.price}
+                    transmission={photo.frontmatter.transmission}
+                    bodyStyle={photo.frontmatter.bodyStyle}
+                    year={photo.frontmatter.year}
+                    ac={photo.frontmatter.airConditioner}
+                    imagePath={photo.frontmatter.relPath} 
+                    alt={photo.frontmatter.name} 
                     />
           }
         )

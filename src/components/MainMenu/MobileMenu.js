@@ -9,18 +9,18 @@ import close from "../../images/icons/close.svg"
 
 const MobileMenu = () => {
 
-    let data = useStaticQuery(graphql`
-    query getCategories {
-        allMdx(filter: {slug: {eq: "categories"}}) {
-          nodes {
-            frontmatter {
-              categories
+    const data = useStaticQuery(graphql`
+        query getCategories {
+            mdx(slug: {eq: "categories"}) {
+                frontmatter {
+                  categories
+                }
             }
-          }
         }
-      }
-  `)
-    console.log(data)
+    `)
+
+    const vehiclesCategories = data.mdx.frontmatter.categories
+    //console.log(data.mdx.frontmatter.categories)
 
     const[isShow, setShow] = useState(false)
     const showMobileMenu = () => {
@@ -58,8 +58,13 @@ const MobileMenu = () => {
                             <li>
                                 <Link to="/">Domů</Link>
                             </li>
-                            <li>
-                                <Link to="/cars">Auta&nbsp;<span style={{display: "inline-block", color: "grey",  transform: "rotate(90deg)", top: "7px"}}>&#10095;</span></Link>
+                            <li className={styles.mobileVehicles}>
+                                <Link to="/vehicles">Auta</Link>
+                                <ul className={styles.mobileVehiclesCategories}>
+                                    {vehiclesCategories.map(cat => {
+                                        return <li key={cat} className={styles.mobileCategory}><Link to="/">{cat}</Link></li>
+                                    })}
+                                </ul>
                             </li>
                             <li>
                                 <Link to="/conditions">Podminky</Link>
@@ -77,16 +82,3 @@ const MobileMenu = () => {
 }
 
 export default MobileMenu
-
-/* export const categories = graphql(`
-query getCategories {
-    file(name: {eq: "categories"}) {
-      childMdx {
-        frontmatter {
-          categories
-        }
-      }
-    }
-  }
-`) */
-

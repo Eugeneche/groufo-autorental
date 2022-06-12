@@ -12,54 +12,56 @@ import { graphql, useStaticQuery } from "gatsby"
 const IndexPage = () => {
 
   let data = useStaticQuery(graphql`
-      query getdata {
-        allMdx {
-          edges {
-            node {
-              frontmatter {
-                category
-                airConditioner
-                bodyStyle
-                name
-                price
-                relPath
-                seats
-                title
-                transmission
-                year
-                dir
-              }
-            }
+    query getdata {
+      allMdx(filter: {slug: {ne: "categories"}}) {
+        nodes {
+          frontmatter {
+            airConditioner
+            bodyStyle
+            category
+            dir
+            name
+            price
+            relPath
+            seats
+            transmission
+            year
           }
+          id
         }
       }
-    `)
+      mdx(slug: {eq: "categories"}) {
+        frontmatter {
+          categories
+        }
+      }
+    }
+  `)
 
-  let uniqueCategories = data.allMdx.edges.map(node => {
-    return node.node.frontmatter.category
-  })
+  //console.log(data)
 
-  uniqueCategories = [...new Set(uniqueCategories)].reverse()
+  let mainPageCategories = data.mdx.frontmatter.categories
 
   return (
   
+    
     <Layout>
       <HeaderSlider />
       <Seo title="Home" />
       <div className={styles.contentContainer}>
         
-          {uniqueCategories.map(category => {
-            const slider = []
-            data.allMdx.edges.map(node => {
-              return node.node.frontmatter.category === category && slider.push(node.node.frontmatter)
-            })
-            return (
-              <section key={category}>
-                <h2>{category}</h2>
-                <ContentSlider array={slider}/>
-              </section>
-            )
-          })} 
+        {mainPageCategories.map(category => {
+          const imageData = []
+          data.allMdx.nodes.map(node => {
+            return node.frontmatter.category === category && imageData.push(node)
+          })
+          return (
+            <section key={category}>
+              <h2>{category}</h2>
+              <ContentSlider imageData={imageData}/>
+            </section>
+          )
+        })} 
 
       </div>
     </Layout>

@@ -15,7 +15,7 @@ const ItemPage = ({data}) => {
       imagePath = fileNode.childImageSharp.gatsbyImageData
     }
   })
-  
+
   return (
     <Layout>
       <Seo title={data.mdx.frontmatter.name} />
@@ -24,9 +24,10 @@ const ItemPage = ({data}) => {
         <div className={style.info}>
           <div className={style.photo}>
 
-              <GatsbyImage 
-                image={imagePath}
-                alt={data.mdx.frontmatter.name}/>     
+            <GatsbyImage 
+              image={imagePath}
+              alt={data.mdx.frontmatter.name}/>    
+
           </div>
           <div className={style.characteristics}></div>
         </div>

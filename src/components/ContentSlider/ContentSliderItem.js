@@ -24,16 +24,19 @@ const ContentSliderItem = (props) => {
               }
             }
           }
-          allMdx {
+          allMdx(filter: {slug: {ne: "categories"}}) {
             nodes {
               frontmatter {
                 relPath
+                category
               }
               slug
             }
           }
         }
       `)
+
+      //console.log(data)
 
     const allPhotos = data.allFile.nodes
     const allSlugs = data.allMdx.nodes
@@ -42,14 +45,18 @@ const ContentSliderItem = (props) => {
       allPhotos.forEach(item => {
 
         allSlugs.forEach(slugEl => {
+          //console.log(slugEl)
+          //console.log((slugEl.frontmatter.category + slugEl.slug).toLowerCase().split('/'))
           if (item.relativePath === props.imagePath && item.relativePath === slugEl.frontmatter.relPath) {
             setImagePath(getImage(item.childImageSharp.gatsbyImageData))
-            setSlug(slugEl.slug.toLowerCase().split('/')[slugEl.slug.toLowerCase().split('/').length - 1])
+            //setSlug(slugEl.slug.toLowerCase().split('/')[slugEl.slug.toLowerCase().split('/').length - 1])
+            setSlug((slugEl.frontmatter.category + slugEl.slug).toLowerCase().split('/')[slugEl.slug.toLowerCase().split('/').length - 1])
+            //console.log((slugEl.frontmatter.category + slugEl.slug).toLowerCase().split('/'))
           }
         })
       })
     })
-    
+    //console.log(window.location)
     return (
       <div className={styles.contentSliderItem} style={{width: props.style, margin: "0 0.5%"}}>
           <Link to={slug}><h3>{props.title}</h3></Link>

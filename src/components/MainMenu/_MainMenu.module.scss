@@ -20,7 +20,7 @@
             align-self: center;
             
             img {
-                margin-bottom: -7px;
+                margin-bottom: -5px;
             }
         }
 
@@ -93,8 +93,43 @@
                     color: red;
                     content: '';
                 }
+
+
             }
         }
+    }
+
+    .vehicles {
+
+        ul.vehicles-categories {
+            display: none;
+            position: relative;
+        }
+    }
+
+    .vehicles::after {
+        position: absolute;
+        content: '';
+        display: block;
+        width: 100%;
+        height: 12px;
+        background: none;
+    }
+    
+    .vehicles:hover {
+        position: relative;
+
+        ul.vehicles-categories {
+            position: absolute;
+            display: block;
+            margin-top: 12px;
+            background: #ffffff;
+
+            li {
+                width: max-content;
+                margin: 2px 5px;
+            }
+        } 
     }
 
     .socials {
@@ -131,7 +166,7 @@
 
     .close {
         width: 30px;
-        margin: 30px;
+        margin: 25px;
         align-self: end;
     } 
 
@@ -153,7 +188,19 @@
                     color: #202020;
                 }
             }
-        }        
+        }  
+        
+        .mobileVehicles {
+            text-align: center;
+
+            .mobileVehiclesCategories {
+                margin: 10px 0 0;
+                font-size: 15px;
+            }
+            
+
+
+        }
     }
 }
 /* mobile end */
@@ -182,4 +229,5 @@
         } */
     }
 }
+
 

@@ -1,10 +1,24 @@
 import * as React from "react"
 import * as styles from "./_MainMenu.module.scss"
 import { Link } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import logo from "../../images/groufo_logo_yellow_white.svg"
 //import { StaticImage } from "gatsby-plugin-image"
 
 const MainMenu = () => {
+
+    const data = useStaticQuery(graphql`
+        query getCats {
+            mdx(slug: {eq: "categories"}) {
+                frontmatter {
+                categories
+                }
+            }
+        }
+    `)
+
+    const vehiclesCategories = data.mdx.frontmatter.categories
+
     return (
         <>
             <div className={styles.mainMenu}>
@@ -17,8 +31,15 @@ const MainMenu = () => {
                     <div className={styles.items}>
                         <div className={styles.pages}>
                             <ul>
-                                <li>
-                                    <Link to="/cars">Auta&nbsp;<span style={{display: "inline-block", color: "grey",  transform: "rotate(90deg)", top: "7px"}}>&#10095;</span></Link>
+                                <li className={styles.vehicles}>
+                                    {/* <Link to="/vehicles">Auta&nbsp;<span style={{display: "inline-block", color: "grey",  transform: "rotate(90deg)", top: "7px"}}>&#10095;</span></Link> */}
+                                    Auta&nbsp;<span style={{display: "inline-block", color: "grey",  transform: "rotate(90deg)", top: "7px"}}>&#10095;</span>
+                                    <ul className={styles.vehiclesCategories}>
+                                    {vehiclesCategories.map(cat => {
+                                        const url = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[" "]/g, "-").toLowerCase()
+                                        return <li key={cat} className={styles.category}><Link to={"/"+url}>{cat}</Link></li>
+                                    })}
+                                </ul>
                                 </li>
                                 <li>
                                     <Link to="/conditions">Podminky</Link>
@@ -35,10 +56,8 @@ const MainMenu = () => {
                     </div>
                 </div>
             </div>
-        </>
-        
+        </>       
     )
-
 }
 
 export default MainMenu
